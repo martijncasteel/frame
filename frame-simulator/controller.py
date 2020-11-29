@@ -84,8 +84,10 @@ class Controller():
         self._delay_until = next_showing + time.time()
 
 
-    def reload(self):
-        print('reloading files..')
+    def reload(self, verbose=False):
+        if verbose:
+            print('reloading files..')
+        
         self._files = self.directory.glob('*.frame')
         self._reload = True
 

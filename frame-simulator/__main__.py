@@ -13,7 +13,7 @@ def handler(signum, _):
 
     if(signum == signal.SIGUSR1):
         if controller:
-            controller.reload()
+            controller.reload(verbose=True)
         return
 
     print(f' interupt has been caught ({signum}), shutting down...')
