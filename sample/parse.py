@@ -29,10 +29,10 @@ if __name__ == '__main__':
         raise TypeError('No valid image descripter')
 
     # for now only support 16 by 16 images
-    if self.reader.width != 16:
+    if reader.width != 16:
         raise TypeError('Image width unsupported')
 
-    if self.reader.height != 16:
+    if reader.height != 16:
         raise TypeError('Image height unsupported')
 
     # initialize background

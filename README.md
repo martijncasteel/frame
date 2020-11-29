@@ -6,7 +6,7 @@ Frame is a small led-matrix controller build for raspberry pi. This simulator us
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. A step by step series of examples that tell you how to get a development env running
 
 ```bash
-# setting up pip environment
+# setting up environment
 python3 -m venv env
 source env/bin/activate
 
@@ -24,7 +24,18 @@ kill -USR1 $pid
 ## Create `.frame` files
 
 ```bash
+setting up environment
+python3 -m venv env
+source env/bin/activate
 
+# install python library
+pip install pygif
+
+# run parser
+python sample/parse.py sample/bird.gif [--output FILE/DIRECTORY]
+
+# try it out 
+python -m frame-simulator sample/
 ```
 
 ## Contributing
