@@ -30,7 +30,7 @@ if __name__ == '__main__':
 
 
     parser = argparse.ArgumentParser(description='Frame simulator')
-    parser.add_argument('-directory', '-d', help='image directory for binaries', default='/home/martijn/Pictures/frame-images')
+    parser.add_argument('directory', help='image directory for binaries')
     args = parser.parse_args()
 
     controller = Controller(args.directory)
