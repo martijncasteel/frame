@@ -10,8 +10,8 @@ These instructions will get you a copy of the project up and running on your loc
 python3 -m venv env
 source env/bin/activate
 
-# install pip packages for your device
-pip install -r requirements.txt
+# install pygame once
+pip install pygame
 
 # run the program
 python -m frame-simulator /directory/to/frame-files
@@ -21,9 +21,15 @@ ps aux | grep -i "python -m frame-simulator"
 kill -USR1 $pid
 ```
 
+## Create `.frame` files
+
+```bash
+
+```
+
 ## Contributing
 
-Please read [the contributing guidelines](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us. We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags](https://github.com/martijncasteel/frame/tags) on this repository. 
+Please read [the contributing guidelines](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us. We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags](https://github.com/martijncasteel/frame-simulator/tags) on this repository. 
 
 ## License
 
