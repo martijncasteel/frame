@@ -5,9 +5,6 @@
 		},
 		{
 			"path": "../frame-simulator"
-		},
-		{
-			"path": "../frame-parser"
 		}
 	],
 	"settings": {}

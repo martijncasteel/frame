@@ -139,4 +139,4 @@ cython_debug/
 
 # IDE
 .vscode/
-frame-simulator.code-workspace
+frame.code-workspace
