@@ -116,7 +116,7 @@ if __name__ == '__main__':
                 f.write(struct.pack('BBB', *color))
 
             for _ in range(padding):
-                f.write(0x0)
+                f.write(b'\x00')
 
         for frame in frames:
             f.write(frame)
