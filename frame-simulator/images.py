@@ -1,6 +1,7 @@
 import struct
 
 HEADER_SIZE = 16
+HEADER_COLOR_TABLE = 2
 
 class Image():
 
@@ -14,9 +15,21 @@ class Image():
             raise ImageException(f'unknown file format: {file.name}')
 
 
+        if self.version == 1:
+            return
+
+        # read length of color_table and padding, and fill color_table
+        self.color_table_size, self.color_table_padding = struct.unpack('!BB', self.file.read(HEADER_COLOR_TABLE))
+        self.color_table = []
+        
+        for _ in range(self.color_table_size):
+            self.color_table.append(struct.unpack('!BBB', self.file.read(3)))
+
+        self.file.seek(self.color_table_padding, 1)
+
     def display(self, controller):
         for _ in range(0, self.loop_count): 
-            for frame in range(0, self.frame_count):
+            for frame in range(self.frame_count):
 
                 delay = self.__read_frame(controller, frame)
 
@@ -26,9 +39,9 @@ class Image():
             self.__rewind()
 
 
-    def __read_frame(self, controller, index):
+    def __read_frame(self, controller, index) -> int:
 
-        # 1 bytes for delay and 3 bytes per color
+        # short for delay and 3 bytes per color
         if self.version == 1: 
             delay = struct.unpack('!H', self.file.read(2))[0]
             frame = self.file.read(self.width * self.height * 3)
@@ -40,14 +53,29 @@ class Image():
 
             return delay
 
+        # short for delay, byte for pointer to color table
+        if self.version == 2:
+            delay = struct.unpack('!H', self.file.read(2))[0]
+            
+            for y in range(self.height):
+                for x in range(self.width):
+                    color_table_index = struct.unpack('!B', self.file.read(1))[0]
+                    controller[(x,y)] = self.color_table[color_table_index]
 
-        else:
-            raise ImageException('unsupported file version')
+            return delay
+        raise ImageException('unsupported file version')
 
 
     def __rewind(self):
         if self.version == 1:
             self.file.seek(HEADER_SIZE)
+
+        elif self.version == 2:
+            self.file.seek(HEADER_SIZE + HEADER_COLOR_TABLE + self.color_table_size * 3 + self.color_table_padding)
+
+        else:
+            raise ImageException('unsupported file version')
+
 
 class ImageException(Exception):
     """Raised when file is not being parsed"""

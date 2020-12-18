@@ -14,6 +14,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Frame parser')
     parser.add_argument('image', help='image to parse')
     parser.add_argument('--output', '-o', help='output directory')
+    parser.add_argument('--version', '-v', help='version output file', default=2, type=int)
     args = parser.parse_args()
 
     file = Path(args.image)
@@ -24,6 +25,9 @@ if __name__ == '__main__':
     reader = gif.Reader()
     reader.feed(image.read())
     loop_count = 1
+
+    if args.version == 2:
+        color_table = []
 
     if not reader.has_screen_descriptor():
         raise TypeError('No valid image descripter')
@@ -73,8 +77,19 @@ if __name__ == '__main__':
                     raise TypeError('color_table is incomplete')
 
             for color in pixels:
-                frame += struct.pack('BBB', *color)
-            
+                if args.version == 1:
+                    frame += struct.pack('BBB', *color)    
+
+                elif args.version == 2:
+                    try:
+                        frame += struct.pack('B', color_table.index(color))
+                    except ValueError as error:
+                        color_table.append(color)
+                        frame += struct.pack('B', len(color_table) - 1)
+                
+                else:
+                    exit(1)
+
             frames.append(frame)
 
     
@@ -86,8 +101,18 @@ if __name__ == '__main__':
         destination = destination / f'{file.stem}.frame'
 
     with open(destination, 'wb') as f:
-        f.write(struct.pack('!7sB', b'\x87\x46\x52\x41\x4d\x45\x0A', 1))
+        f.write(struct.pack('!7sB', b'\x87\x46\x52\x41\x4d\x45\x0A', args.version))
         f.write(struct.pack('!4x BBBB', reader.width, reader.height, len(frames), loop_count))
+
+        if args.version == 2:
+            padding = (len(color_table) * 3 + 2) % 16
+            f.write(struct.pack('!BB', len(color_table), padding))
+
+            for color in color_table:
+                f.write(struct.pack('BBB', *color))
+
+            for _ in range(padding):
+                f.write(0x0)
 
         for frame in frames:
             f.write(frame)
