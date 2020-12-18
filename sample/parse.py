@@ -100,6 +100,10 @@ if __name__ == '__main__':
     else:
         destination = destination / f'{file.stem}.frame'
 
+    if args.version == 2:
+        if len(color_table) > 255:
+            raise TypeError('color_table is too large')
+
     with open(destination, 'wb') as f:
         f.write(struct.pack('!7sB', b'\x87\x46\x52\x41\x4d\x45\x0A', args.version))
         f.write(struct.pack('!4x BBBB', reader.width, reader.height, len(frames), loop_count))
