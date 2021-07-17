@@ -42,7 +42,7 @@ class Controller():
             try:
                 with file.open(mode='rb') as f:
 
-                    image = Image(f)
+                    image = Image.load(f)
                     image.display(self)
 
             except ImageException as exception:
