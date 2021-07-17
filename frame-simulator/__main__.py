@@ -2,7 +2,6 @@
 Simple simulator displaying received image on a 16 by 16 pygame 
 window. Listening to port and display on new receive.
 """
-import os
 import signal
 import argparse
 

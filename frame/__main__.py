@@ -29,7 +29,7 @@ if __name__ == '__main__':
     signal.signal(signal.SIGUSR1, handler)
 
 
-    parser = argparse.ArgumentParser(description='Frame simulator')
+    parser = argparse.ArgumentParser(description='Frame')
     parser.add_argument('directory', help='image directory for binaries')
     args = parser.parse_args()
 

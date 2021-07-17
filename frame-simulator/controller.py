@@ -2,12 +2,11 @@
 This controller is used to render a 16 by 16 image on screen using
 pygame. Reading it contents of a custom binary file.
 """
-import os
 import time
 import pygame
 
 from pathlib import Path
-from .images import Image, ImageException
+from common.images import Image, ImageException
 
 
 class Controller():

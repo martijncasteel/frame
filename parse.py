@@ -1,12 +1,14 @@
 """
-Object for image parsing functions
+Simple command line tool to parse images to the frame format
 """
 import math
-import copy
-import struct 
-
+import struct
+import argparse
 import gif
+
 from pathlib import Path
+from common.images import ImageException
+
 
 class Frame():
     """
@@ -107,7 +109,7 @@ class Image():
                     elif len(self.reader.color_table) > 0:
                         pixels[self.transpose(index, block)] = self.reader.color_table[pixel]
                     else:
-                        raise InvalidImage('color_table is incomplete')
+                        raise ImageException('color_table is incomplete')
 
                 frame = Frame(delay, pixels)
                 self.frames.append(frame)
@@ -121,6 +123,24 @@ class Image():
         row = math.floor(index / image.width)
         return (index % image.width + image.left) + (row + image.top) * 16
 
+if __name__ == '__main__':
 
-class ImageException(Exception):
-    """Raised when the input value is too small"""
+    parser = argparse.ArgumentParser(description='Frame parser')
+    parser.add_argument('image', help='image to parse')
+    parser.add_argument('--output', '-o', help='output directory')
+
+    parser.add_argument('--version', '-v', type=int, help='frame file version')
+    args = parser.parse_args()
+
+    file = Path(args.image)
+    image = Image(file)
+
+    destination = Path(args.output) if args.output else Path(file.parent)
+    if not destination.is_dir():
+        destination = Path(destination.parent) / f'{destination.stem}.frame'
+    else:
+        destination = destination / f'{file.stem}.frame'
+
+    image.store(destination, args.version)
+
+    exit(0)
