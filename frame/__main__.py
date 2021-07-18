@@ -25,6 +25,7 @@ def handler(signum, _):
 
 if __name__ == '__main__':
 
+    signal.signal(signal.SIGTERM, handler)
     signal.signal(signal.SIGINT, handler) 
     signal.signal(signal.SIGUSR1, handler)
 

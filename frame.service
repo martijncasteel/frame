@@ -1,0 +1,13 @@
+[Unit]
+Description=Frame service
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+
+WorkingDirectory=/home/martijn/frame
+ExecStart=/home/martijn/frame/env/bin/python3 -m frame /home/martijn/images
+
+[Install]
+WantedBy=multi-user.target
