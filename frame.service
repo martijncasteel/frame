@@ -2,9 +2,12 @@
 Description=Frame service
 After=multi-user.target
 
+StartLimitIntervalSec=400
+
 [Service]
 Type=simple
 Restart=always
+RestartSec=10
 
 WorkingDirectory=/home/martijn/frame
 ExecStart=/home/martijn/frame/env/bin/python3 -m frame /home/martijn/images
