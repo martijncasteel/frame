@@ -1,6 +1,8 @@
 # frame simulator
 Frame is a small led-matrix controller build for raspberry pi. This simulator uses Pygame to simulate without an actual display. Frame uses a custom file format, with the colors for every pixel. I used a small converter script to create `.frame` files from gifs.  I wouldn't have gotten far without [pygif](https://github.com/robert-ancell/pygif) of Robert Ancell and the explanation of [Christophe Tronche](https://tronche.com/computer-graphics/gif/gif89a.html#image-descriptor).
 
+The [main branch](https://github.com/martijncasteel/frame/tree/main) holds the code for the program to be ran on a raspberry pi!
+
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. A step by step series of examples that tell you how to get a development env running
 
