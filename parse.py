@@ -8,7 +8,7 @@ import struct
 import gif
 
 from pathlib import Path
-from common.images import ImageException
+from frame.images import ImageException
 
 def create_from_gif(path, destination, version):
     """Load gif file for parsing and store it as a .frame file"""
