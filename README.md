@@ -1,6 +1,8 @@
 # Frame
 Frame is a small led-matrix controller build for raspberry pi zero. Frame uses a custom file format, with colors for every pixel. I used a small converter script to create `.frame` files from gifs. I wouldn't have gotten far without [pygif](https://github.com/robert-ancell/pygif) of Robert Ancell and the explanation of [Christophe Tronche](https://tronche.com/computer-graphics/gif/gif89a.html#image-descriptor).
 
+Just want to try something out, view your image files, or looking for a way to run it without a raspberry pi. Try out the [simulator](https://github.com/martijncasteel/frame/tree/simulator)!
+
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. A step by step series of examples that tell you how to get a development env running
 
