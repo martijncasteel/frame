@@ -9,8 +9,8 @@ Type=simple
 Restart=always
 RestartSec=10
 
-WorkingDirectory=/home/martijn/frame
-ExecStart=/home/martijn/frame/env/bin/python3 -m frame /home/martijn/images
+WorkingDirectory=/var/local/frame
+ExecStart=/var/local/frame/env/bin/python3 -m frame /var/local/images
 
 [Install]
 WantedBy=multi-user.target

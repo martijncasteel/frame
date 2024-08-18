@@ -36,6 +36,9 @@ pip install -r requirements.txt
 
 # run the program with frame.service or use
 python -m frame /directory/to/frame-files
+
+# install service file
+ln -s /var/local/frame/frame.service frame.service
 ```
 
 

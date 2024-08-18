@@ -9,7 +9,7 @@ import board
 import neopixel
 
 from pathlib import Path
-from images import Image, ImageException
+from .images import Image, ImageException
 
 
 class Controller():
