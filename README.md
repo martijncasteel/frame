@@ -35,7 +35,7 @@ pip install pygif
 python sample/parse.py sample/bird.gif [--output FILE/DIRECTORY]
 
 # try it out 
-python -m frame-simulator sample/
+python -m frame sample/
 ```
 
 ## Contributing
